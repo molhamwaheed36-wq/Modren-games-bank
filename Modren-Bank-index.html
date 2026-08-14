@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modren Bank</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Tahoma,sans-serif;background:#08111f;color:#eef6ff}
+.wrap{max-width:950px;margin:auto;padding:18px}.hero,.card{background:#101c2e;border:1px solid #263852;border-radius:20px;padding:20px;margin:12px 0}
+.hero{background:linear-gradient(135deg,#10294a,#111827)}h1{margin:0 0 6px}.muted{color:#9fb0c8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.stat{font-size:28px;font-weight:900}input,button{font:inherit}input{width:100%;padding:12px;border-radius:10px;border:1px solid #344b68;background:#08111f;color:#fff;margin:7px 0}
+button{padding:11px 15px;border:0;border-radius:11px;background:#2563eb;color:white;font-weight:800}button.danger{background:#dc2626}.item{display:flex;justify-content:space-between;gap:10px;align-items:center;background:#0a1423;border-radius:12px;padding:12px;margin:8px 0}.pill{background:#243a58;border-radius:999px;padding:5px 9px}
+</style>
+</head>
+<body><div class="wrap">
+<div class="hero"><h1>🏦 Modren Bank</h1><div class="muted">المركز المالي لنظام Modren Empire</div></div>
+<div class="grid">
+<div class="card"><div class="muted">👤 Accounts</div><div class="stat" id="count">0</div></div>
+<div class="card"><div class="muted">💰 Total Balance</div><div class="stat" id="total">0</div></div>
+<div class="card"><div class="muted">🔄 Transactions</div><div class="stat" id="tx">0</div></div>
+</div>
+<div class="card">
+<h2>إنشاء حساب</h2>
+<input id="name" placeholder="اسم الحساب">
+<button onclick="add()">إنشاء حساب بنكي</button>
+<div id="list"></div>
+</div>
+<div class="card">
+<h2>⚙️ الإدارة</h2>
+<p class="muted">هذه نسخة واجهة محلية. الربط الحقيقي مع حسابات اللعبة، الصلاحيات، المتجر، API والتحديثات عن بُعد يحتاج Backend آمن وقاعدة بيانات.</p>
+<button class="danger" onclick="wipe()">حذف بيانات البنك من هذا الجهاز</button>
+</div>
+</div>
+<script>
+const K='modren_bank_v1';
+let s=JSON.parse(localStorage.getItem(K)||'null')||{accounts:[],tx:[]};
+function save(){localStorage.setItem(K,JSON.stringify(s));render()}
+function add(){let n=document.getElementById('name').value.trim();if(!n)return; s.accounts.push({id:Date.now(),name:n,balance:0});save();document.getElementById('name').value=''}
+function del(id){s.accounts=s.accounts.filter(a=>a.id!==id);save()}
+function wipe(){if(confirm('حذف كل بيانات البنك من هذا الجهاز؟')){localStorage.removeItem(K);location.reload()}}
+function render(){document.getElementById('count').textContent=s.accounts.length;document.getElementById('total').textContent=s.accounts.reduce((x,a)=>x+a.balance,0);document.getElementById('tx').textContent=s.tx.length;document.getElementById('list').innerHTML=s.accounts.map(a=>`<div class="item"><span>🏦 ${a.name}<br><span class="pill">${a.balance} Coins</span></span><button class="danger" onclick="del(${a.id})">حذف الحساب</button></div>`).join('')||'<p class="muted">لا توجد حسابات.</p>'}
+render();
+</script></body></html>
