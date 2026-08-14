@@ -5,7 +5,7 @@ body{margin:0;background:#0b1628;color:#fff;font-family:Arial;padding:18px}main{
 <div class="box"><h1>🏦 Modren Bank</h1><div class="muted">نظام Modren Bank لمشروع Modren Empire</div></div>
 <section id="login" class="box"><h2>تسجيل الدخول</h2><div class="grid">
 <div><h3>👤 عضو</h3><input id="user" placeholder="اسم المستخدم"><input id="pass" type="password" placeholder="كلمة المرور"><button onclick="memberLogin()">دخول</button></div>
-<div><h3>👑 مدير</h3><input id="adminPass" type="password" placeholder="كلمة مرور المدير"><button onclick="adminLogin()">دخول المدير</button></div></div>
+<div><h3>👑 مدير</h3><input id="adminPass:mol1452013mol" type="password" placeholder="كلمة مرور المدير"><button onclick="adminLogin()">دخول المدير</button></div></div>
 <p class="muted">نسخة تجريبية محلية؛ كلمات المرور ليست مناسبة للاستخدام الحقيقي قبل إضافة Backend آمن.</p></section>
 <section id="app" class="hide"><div class="box"><button onclick="home()">الرئيسية</button><button onclick="logs()">📜 سجل المعاملات</button><button id="adminBtn" class="hide" onclick="admin()">⚙️ الإدارة</button><button class="danger" onclick="logout()">خروج</button></div>
 <div id="page" class="box"></div></section>
